@@ -3,10 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const ruletaCanvas = document.getElementById("ruleta");
     const resultado = document.getElementById("resultado");
     const girarBtn = document.getElementById("girar-btn");
+    const listaGanadores = document.getElementById("lista-ganadores");
     const ctx = ruletaCanvas.getContext("2d");
 
     let data = {};
     let nombres = [];
+    let ganadores = [];
     let currentAngle = 0;
 
     // Cargar datos del archivo CSV
@@ -37,6 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
     grupoSelect.addEventListener("change", () => {
         const grupo = grupoSelect.value;
         nombres = grupo ? data[grupo] : [];
+        ganadores = []; // Reiniciar ganadores al cambiar de grupo
+        listaGanadores.innerHTML = ""; // Limpiar la lista de ganadores
         drawRuleta();
     });
 
@@ -72,11 +76,11 @@ document.addEventListener("DOMContentLoaded", () => {
             resultado.textContent = "Selecciona un grupo válido.";
             return;
         }
-    
+
         const spinTime = 3000; // Milisegundos
         const startAngle = currentAngle;
         const endAngle = startAngle + (Math.random() * 10 + 10) * Math.PI;
-    
+
         const startTime = Date.now();
         const spin = () => {
             const elapsed = Date.now() - startTime;
@@ -87,15 +91,25 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 currentAngle = endAngle % (2 * Math.PI); // Normalizar el ángulo
                 drawRuleta();
-    
+
                 // Cálculo del índice seleccionado
                 const sliceAngle = (2 * Math.PI) / nombres.length;
                 const selectedIndex = Math.floor(nombres.length - ((currentAngle / sliceAngle) % nombres.length)) % nombres.length;
-    
-                resultado.textContent = `¡El ganador es: ${nombres[selectedIndex]}!`;
+
+                const ganador = nombres[selectedIndex];
+                resultado.textContent = `¡El ganador es: ${ganador}!`;
+
+                // Agregar a la lista de ganadores si no está repetido
+                if (!ganadores.includes(ganador)) {
+                    ganadores.push(ganador);
+                    const li = document.createElement("li");
+                    li.textContent = ganador;
+                    listaGanadores.appendChild(li);
+                } else {
+                    resultado.textContent += " (Ya había ganado)";
+                }
             }
         };
         spin();
     });
-    
 });
