@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentAngle = 0;
 
     // Cargar datos del archivo CSV
-    fetch('./data/ejemplo.csv')
+    fetch('/ruleta-alumnos/data/ejemplo.csv')
         .then(response => response.text())
         .then(csv => {
             const lines = csv.trim().split("\n").slice(1); // Ignorar encabezado
