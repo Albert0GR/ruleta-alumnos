@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+select, button, input {
+    font-size: 1em;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    cursor: pointer;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.ruleta-container {
+    margin: 20px auto;
+    position: relative;
+}
+
+canvas {
+    border: 2px solid #000;
+    border-radius: 50%;
+}
+
+#resultado {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 20px;
+}
